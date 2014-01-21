@@ -37,7 +37,9 @@ of them, that's the hash value and 3 copies of the word will be moved to sorted)
 
 #Most straightforward -- implements bubble sort.
 
-def sort(list_of_words)
+def sort(words)
+
+list_of_words = words.each {|word| word.downcase}
 
 change = true
 
@@ -63,9 +65,22 @@ while change == true
 
 end
 
+words.each{|word|
+
+list_of_words.each_with_index{ |listWord, index|
+
+if listWord.downcase == word.downcase
+	list_of_words[index] = word
+end
+
+}
+
+}
 return list_of_words
 
 end
+
+puts sort(["Capital", "lower", "Bob", "Fred", "vern"])
 
 #Slightly less straightforward.  Finds min of array, puts it into a "sorted" array, erases it from
 #unsorted and repeats until everything is sorted.  Deals with doubles by creating a hash with each
