@@ -36,7 +36,7 @@ roman_numeral_letters.each {|letter|
 #than it.  Thus the next loop adds a comma after any entry that is followed by a
 #roman numeral either equal to or less than it.  However, when a letter is followed
 #by a letter GREATER than it, that means the two letters are part of a single numeral,
-#and the first is subtracted from the second.  
+#and the first is subtracted from the second. We do not put a comma between such letters. 
 
 #After the loop is finished, we have an array with separate letters and commas between
 #any two letters that constitute separate digits.  (E.g., for IXIV we would have an 
@@ -61,15 +61,15 @@ roman_numeral_letters.each_with_index {|letter, index|
 
 roman_numeral_letters = roman_numeral_letters.join.split(",")
 
-#We use "roman_numeral_conversion" to add the digits values (calculated below)
+#We use "roman_numeral_conversion" to add the digits' values (calculated below)
 #and convert to integer.
 
 roman_numeral_conversion = 0
 
-#The next loop goes through each string (i.e., separate numeral) in the array and adds their value to 
+#The next loop goes through each separate numeral in the array and adds their value to 
 #the running total.  If the numeral is two characters long, the length of the array formed
 #by splitting each character is 2 and we subtract the first and add the second to the total.
-#Otherwise the character is simply translated to its number equivalent.
+#Otherwise the character is simply translated to its number equivalent and added to the total.
 
 roman_numeral_letters.each {|numeral|
 
@@ -88,7 +88,7 @@ end
 
 }
 
-#Return the total value of all separate roman numerals.
+#Finally we return the total value of all separate roman numerals.
 
 return roman_numeral_conversion
 
