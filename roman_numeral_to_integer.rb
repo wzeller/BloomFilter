@@ -34,7 +34,7 @@ roman_numeral_letters.each {|letter|
 #numerals (1 90 and 1 9).  The key to parsing roman numerals is realizing that a
 #numeral ends when the next one in the sequence is either the same as it or less
 #than it.  Thus the next loop adds a comma after any entry that is followed by a
-#roman numeral either equal to or greater than it.  However, when a letter is followed
+#roman numeral either equal to or less than it.  However, when a letter is followed
 #by a letter GREATER than it, that means the two letters are part of a single numeral,
 #and the first is subtracted from the second.  
 
