@@ -1,8 +1,6 @@
--Learn-to-Program--Exercises
+Bloom Filter
 ============================
 
-Exercises from "Learn to Program" by Chris Pine.  
-This is a place to store ruby code I wrote in 
-going through Chris Pine's book.  Some are directly
-taken from the book and others are inspired by 
-ideas in it.  
+Implemented a Bloom Filter (more info here: http://en.wikipedia.org/wiki/Bloom_filter) and tests to show its accuracy as well as my own hash algorithm to see how they work.  It loads a dictionary into the filter and then generates 10,000 random words to test how many false positives there are.  As predicted by theory, a bitmap 10 times the size of the data (here a dictionary of around 350,000 words) has only around 1% false positives despite the fact that it takes up far less space than the dictionary itself.  Use cases for Bloom Filters include anywhere that has very limited space -- like portable electronics -- where they would be ideal for spell checkers (where the cost of a false positive is not that high).  More comments on the inner-workings of Bloom Filters (as well as some discussion of the underlying math) in the comments in the code.  
+
+If you run the bloom_filter_kata.rb file, you will see two lines of output about the filter itself (number of zeros generated after the dictionary is loaded into the filter and the percentage of zeros -- rough proxies for the distribution/effectiveness of the filter) as well as the number of false positives generated in 10,000 random words.   
