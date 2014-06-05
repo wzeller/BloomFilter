@@ -35,10 +35,7 @@
 
 require 'digest/md5'
 require 'zlib'
-
-DICTIONARY = File.readlines("dictionary.txt")
-
-#First I have copied and pasted a dictionary with appx. 350,000 words. 
+DICTIONARY = File.readlines("dictionary.txt").map(&:chomp)
 
 #N = number of entries.
 #M = size of bitmap.
@@ -250,63 +247,37 @@ end
 #traditional method that tests for membership in a set.)
 
 def random_word_generator(numberOfLetters)
-
-  alphabet = ('a'..'z').to_a 
+  alphabet =* ('a'..'z') 
   word = []
 
-  #Builds a word one letter at a time using the shuffle method.
-
   numberOfLetters.times do
-
-    word << alphabet.shuffle[0]
-
+    word << alphabet.sample(1)
   end
 
-  #Puts the word back together.
-
-  return word.join("")
-
+  word.join
 end 
 
 def tester(bitmap)
 
-count = 0
+  count = 0
+  random_words = []
 
-random_words = []
+  #Create list of 10000 random 5-letter words.
 
-#Create list of 10000 random 5-letter words.
+  10000.times {random_words << random_word_generator(5)}
 
-10000.times {
+  #Test if the word is included in the filter according to 
+  #look_up and NOT in fact included ("false positives") and 
+  #count and print the total number of those.
 
-  random_words << random_word_generator(5)
-
-}
-
-#Test if the word is included in the filter according to 
-#look_up and NOT in fact included ("false positives") and 
-#count and print the total number of those.
-
-random_words.each {|word|
-
-  word = word.to_s
-
-  if look_up(word, 3354770, bitmap) == true
-
-    puts word
-
-    if dictionary.include?(word)
-      puts "in dict"
-    else
+  random_words.each do |word|
+    if look_up(word, 3354770, bitmap) == true && !DICTIONARY.include?(word)
       count += 1
     end
-
   end
 
-}
-
-#Print the number of false positives.
-
-puts count 
+  #Print the percentage of false positives.
+  puts (count.to_f/10000) 
 
 end
 
@@ -315,5 +286,6 @@ end
 #to generate fewer false positives.)
 
 tester(bitmap)
+
 
 
